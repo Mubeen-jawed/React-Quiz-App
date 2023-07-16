@@ -38,7 +38,7 @@ app.use(cors())
 
 app.get("/data", function (req, res) {
 
-  QuizList.find({ quizName: "science test" })
+  QuizList.find({})
     .then((foundList) => {
       res.send(foundList)
     })

@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Form = () => {
 
   const [quizName, setQuizName] = useState("")
-  const [questionNumber, setQuestionNumber] = useState(0)
+  const [questionNumber, setQuestionNumber] = useState(1)
   const [question, setQuestion] = useState("")
   const [option1, setOption1] = useState("")
   const [option2, setoption2] = useState("")
@@ -25,7 +25,13 @@ const Form = () => {
     axios.post("http://localhost:8080/addQuestion", {
       questionNumber, question, option1, option2, option3, option4, answer, quizName
     })
+    incrementQustionNum()
   }
+
+  function incrementQustionNum() {
+    setQuestionNumber(prevValue => prevValue + 1)
+  }
+
 
 
   return (
@@ -36,7 +42,7 @@ const Form = () => {
           <label>Quiz Name</label>
         </div>
         <div class="group">
-          <input onChange={(e) => setQuestionNumber(e.target.value)} type="number" /><span class="highlight"></span><span class="bar"></span>
+          <input onChange={(e) => setQuestionNumber(e.target.value)} value={questionNumber} type="number" /><span class="highlight"></span><span class="bar"></span>
           <label>Question #</label>
         </div>
         <div class="group">
@@ -66,7 +72,7 @@ const Form = () => {
         <button onClick={handleAddQuestionClick} type="submit" class="button buttonBlue">Add another Question
           <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
         </button>
-        <Link to="/" onClick={handleQuizClick} type='submit' class="button buttonRed">Create Quiz
+        <Link to="/quiz" onClick={handleQuizClick} type='submit' class="button buttonRed">Create Quiz
           <div class="ripples buttonRipples"><span class="ripplesCircle"></span></div>
         </Link>
       </form>
